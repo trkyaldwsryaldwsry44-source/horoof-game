@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>حروف - Hex</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">ح</div>
+        <div class="title">
+          <div class="h1">حروف</div>
+          <div class="h2">شبكة سداسية — للجمعات</div>
+        </div>
+      </div>
+
+      <div class="session">
+        <div class="pill" id="roomPill">—</div>
+        <button class="btn ghost" id="btnLeave">تغيير / خروج</button>
+      </div>
+    </header>
+
+    <!-- Landing -->
+    <section class="card" id="screenLanding">
+      <h2>اختر وضع الدخول</h2>
+      <p class="muted">Host للحكم — Guest للمتسابق — Screen للعرض على شاشة</p>
+
+      <div class="grid2">
+        <div class="box">
+          <h3>Host</h3>
+          <input id="hostName" class="inp" placeholder="اسم الحكم (اختياري)" />
+          <button class="btn primary" id="btnCreate">إنشاء جلسة</button>
+        </div>
+
+        <div class="box">
+          <h3>Guest</h3>
+          <input id="guestName" class="inp" placeholder="اسمك" />
+          <input id="joinCode1" class="inp" placeholder="كود الجلسة" />
+          <button class="btn" id="btnJoinGuest">دخول كـ Guest</button>
+        </div>
+
+        <div class="box">
+          <h3>Screen</h3>
+          <input id="joinCode2" class="inp" placeholder="كود الجلسة" />
+          <button class="btn" id="btnJoinScreen">دخول كـ Screen</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Game -->
+    <section class="card hidden" id="screenGame">
+      <div class="gameWrap">
+        <!-- Side markers -->
+        <div class="side red left">أحمر</div>
+        <div class="side red right">أحمر</div>
+        <div class="side green top">أخضر</div>
+        <div class="side green bottom">أخضر</div>
+
+        <div class="board" id="board"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panelRow">
+          <div class="big" id="roleBadge">—</div>
+
+          <div class="buzzerBox" id="buzzerBox">
+            <button class="btn red" id="btnBuzzRed">🔴 زر الأحمر</button>
+            <button class="btn green" id="btnBuzzGreen">🟢 زر الأخضر</button>
+          </div>
+
+          <div class="hostTools hidden" id="hostTools">
+            <button class="btn" id="btnClearBuzz">مسح زر السبق</button>
+            <button class="btn ghost" id="btnReset">Reset</button>
+          </div>
+        </div>
+
+        <div class="panelRow">
+          <div class="status">
+            <div class="label">آخر سؤال</div>
+            <div class="value" id="lastQ">—</div>
+          </div>
+
+          <div class="status">
+            <div class="label">الجواب</div>
+            <div class="value" id="lastA">—</div>
+          </div>
+
+          <div class="status">
+            <div class="label">اللي ضغط أول</div>
+            <div class="value" id="buzzWho">—</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal hidden" id="modal">
+      <div class="modalCard">
+        <div class="modalTop">
+          <div class="chip" id="modalLetter">—</div>
+          <button class="x" id="modalClose">×</button>
+        </div>
+
+        <h3 class="q" id="modalQ">—</h3>
+        <div class="aRow">
+          <button class="btn ghost" id="btnShowA">إظهار الجواب</button>
+          <div class="a hidden" id="modalA">—</div>
+        </div>
+
+        <div class="hostOnly hidden" id="modalHostOnly">
+          <div class="colorRow">
+            <button class="btn red" data-color="red" id="btnColorRed">تثبيت للأحمر</button>
+            <button class="btn green" data-color="green" id="btnColorGreen">تثبيت للأخضر</button>
+            <button class="btn ghost" data-color="none" id="btnColorNone">إلغاء</button>
+          </div>
+
+          <button class="btn" id="btnAnotherQ">سؤال ثاني لنفس الحرف</button>
+        </div>
+
+        <p class="muted small">ملاحظة: الـ Host هو اللي يفتح الأسئلة ويثبت اللون.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="./questions.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
